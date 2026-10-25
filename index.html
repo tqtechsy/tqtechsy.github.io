@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TQ Tech · محوّل LREC</title>
+<meta name="description" content="محوّل LREC: حوّل تسجيلات محاضراتك (.lrec) إلى فيديو MP4 مع الدردشة أو صوت MP3، محاضرة ساعة في نحو دقيقتين ونصف.">
+<meta property="og:title" content="محوّل LREC · TQ Tech">
+<meta property="og:description" content="محاضرة ساعة جاهزة في نحو دقيقتين ونصف: فيديو MP4 مع الدردشة، أو صوت MP3.">
+<meta property="og:image" content="cover.png">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="avatar.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b1220; --navy-2: #131d33; --card: #111a2e; --line: #22304d;
+    --amber: #f59e0b; --amber-hi: #fbbf24; --amber-ink: #1a1206;
+    --text: #f1f5f9; --muted: #9fb0c8; --blue: #2f6fe0; --ok: #34d399;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif; font-size: 17px; line-height: 1.75; color: var(--text);
+    background: radial-gradient(70% 50% at 50% 0%, rgba(245, 158, 11, .12), transparent 70%), linear-gradient(180deg, var(--navy-2), var(--navy) 40%); background-color: var(--navy); }
+  a { color: var(--amber-hi); }
+  .wrap { width: min(1040px, 100% - 32px); margin-inline: auto; }
+  /* top bar */
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 22px; color: var(--text); text-decoration: none; direction: ltr; }
+  .logo svg { width: 44px; }
+  .logo b { color: var(--amber); }
+  .lang { border: 1px solid var(--line); background: none; color: var(--muted); font: inherit; font-size: 14px; padding: 4px 14px; border-radius: 999px; cursor: pointer; }
+  .lang:hover { color: var(--text); border-color: var(--amber); }
+  /* hero */
+  .hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; padding: 40px 0 56px; }
+  .hero h1 { font-size: clamp(34px, 5vw, 52px); line-height: 1.25; margin: 0 0 14px; font-weight: 900; }
+  .hero h1 em { font-style: normal; color: var(--amber); }
+  .hero p.lead { font-size: 20px; color: var(--muted); margin: 0 0 26px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 18px; border: 1px solid var(--line); color: var(--text); }
+  .btn.primary { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); }
+  .btn.primary:hover { background: var(--amber-hi); }
+  .btn:not(.primary):hover { border-color: var(--amber); }
+  .small { font-size: 14px; color: var(--muted); }
+  .app-card { background: linear-gradient(160deg, #16223d, var(--card)); border: 1px solid var(--line); border-radius: 22px; padding: 30px; text-align: center; box-shadow: 0 30px 80px rgba(0, 0, 0, .35); }
+  .app-card img { width: 120px; filter: drop-shadow(0 14px 30px rgba(47, 111, 224, .45)); }
+  .app-card .name { font-size: 30px; font-weight: 900; margin: 10px 0 2px; }
+  .app-card .name span { color: var(--amber); }
+  .speed { display: flex; justify-content: center; align-items: baseline; gap: 18px; margin-top: 18px; }
+  .speed div { display: grid; }
+  .speed b { font-size: 34px; line-height: 1.1; }
+  .speed .old b { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 2px; }
+  .speed .new b { color: var(--amber); }
+  /* sections */
+  section { padding: 44px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 30px; margin: 0 0 22px; font-weight: 900; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  .card h3 { margin: 0 0 6px; font-size: 19px; }
+  .card p { margin: 0; color: var(--muted); font-size: 16px; }
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .plan ul { margin: 10px 0 0; padding-inline-start: 22px; color: var(--muted); }
+  .plan li::marker { color: var(--amber); }
+  .plan.pro { border-color: var(--amber); }
+  .tag { display: inline-block; font-size: 13px; font-weight: 700; padding: 1px 10px; border-radius: 999px; background: rgba(245, 158, 11, .14); color: var(--amber-hi); margin-inline-start: 8px; vertical-align: middle; }
+  .price { font-size: 26px; font-weight: 900; margin: 6px 0 0; }
+  .price span { font-size: 16px; font-weight: 600; color: var(--muted); }
+  ol.steps { margin: 0; padding-inline-start: 24px; }
+  ol.steps li { margin-bottom: 8px; }
+  ol.steps li::marker { color: var(--amber); font-weight: 900; }
+  .note { border-inline-start: 3px solid var(--amber); padding: 10px 16px; background: rgba(245, 158, 11, .07); border-radius: 6px; color: var(--muted); }
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 15px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+  footer a { color: var(--text); }
+  [lang="en"] .ar, [lang="ar"] .en { display: none; }
+  .ltr { direction: ltr; unicode-bidi: isolate; }
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding-top: 16px; }
+    .grid, .plans { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#">
+      <svg viewBox="-6 -8 432 216" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fcd34d"/><stop offset=".55" stop-color="#f59e0b"/><stop offset="1" stop-color="#d97706"/></linearGradient>
+        <path id="q" d="M24 0 H86 Q108 0 103 23 L72 178 Q67 200 54 200 Q41 200 38 178 L7 23 Q3 0 24 0 Z"/></defs>
+        <g fill="url(#g)" transform="skewX(-13) translate(46 0)"><use href="#q"/><use href="#q" x="128"/><use href="#q" x="256"/></g></svg>
+      <span>TQ <b>Tech</b></span>
+    </a>
+    <button class="lang" id="lang">English</button>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1><span class="ar">محاضرة ساعة جاهزة في نحو <em>دقيقتين ونصف</em></span><span class="en">An hour-long lecture ready in about <em>two and a half minutes</em></span></h1>
+      <p class="lead"><span class="ar">محوّل LREC يحوّل تسجيلات محاضراتك (‎.lrec‎) إلى فيديو MP4 مع الدردشة على الشاشة، أو صوت MP3، ويجلب محاضراتك الجديدة وحده.</span><span class="en">LREC Converter turns your lecture recordings (.lrec) into MP4 video with the chat on screen, or MP3 audio, and fetches your new lectures by itself.</span></p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/tqtechsy/lrec-converter/releases/latest/download/LREC-Converter-setup.exe"><span class="ar">تنزيل لنظام Windows</span><span class="en">Download for Windows</span></a>
+      </div>
+      <p class="small"><span class="ar"><bdi>Windows 10 / 11</bdi> · نحو 6 ميغابايت · العربية والإنكليزية</span><span class="en">Windows 10 / 11 · about 6 MB · Arabic and English</span></p>
+    </div>
+    <div class="app-card">
+      <img src="icon.png" alt="">
+      <div class="name"><span class="ar">محوّل <span>LREC</span></span><span class="en">LREC <span>Converter</span></span></div>
+      <div class="small"><span class="ar">محاضرة مدتها ساعة</span><span class="en">a one-hour lecture</span></div>
+      <div class="speed">
+        <div class="old"><b class="ltr">6:00</b><span class="small"><span class="ar">الطرق التقليدية</span><span class="en">usual tools</span></span></div>
+        <div class="new"><b class="ltr">2:30</b><span class="small"><span class="ar">محوّل LREC</span><span class="en">LREC Converter</span></span></div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="ar">ماذا يفعل؟</span><span class="en">What it does</span></h2>
+    <div class="grid">
+      <div class="card"><h3><span class="ar">سريع، دون حذف شيء</span><span class="en">Fast, nothing cut</span></h3>
+        <p><span class="ar">خوارزميات محدّثة تحافظ على كامل إطارات الفيديو وبيانات الصوت والدردشة كما هي.</span><span class="en">Updated algorithms that keep every video frame, and all the sound and chat, exactly as they are.</span></p></div>
+      <div class="card"><h3><span class="ar">الدردشة على الشاشة</span><span class="en">The chat on screen</span></h3>
+        <p><span class="ar">رسائل المحاضرة تظهر في وقتها كترجمة في الفيديو، مع نص كامل للدردشة.</span><span class="en">The lecture's messages appear at their time as subtitles, with a full chat transcript.</span></p></div>
+      <div class="card"><h3><span class="ar">الجلب التلقائي</span><span class="en">Auto-fetch</span></h3>
+        <p><span class="ar">تابع مقرراتك، فتصل محاضراتها الجديدة وتتحوّل وحدها، مع إشعار عند جهوزها.</span><span class="en">Follow your courses: their new lectures arrive and convert by themselves, with a notification when ready.</span></p></div>
+      <div class="card"><h3><span class="ar">مكتبة مرتبة</span><span class="en">A tidy library</span></h3>
+        <p><span class="ar">محاضراتك حسب الفصل والمقرر، مع علامة المشاهدة والمدة.</span><span class="en">Your lectures by term and course, with watched marks and lengths.</span></p></div>
+      <div class="card"><h3><span class="ar">البحث في الدردشات</span><span class="en">Search the chats</span></h3>
+        <p><span class="ar">ابحث عن كلمة في دردشات كل محاضراتك وانتقل إلى لحظتها.</span><span class="en">Find a word in the chats of all your lectures and jump to that moment.</span></p></div>
+      <div class="card"><h3><span class="ar">يحدّث نفسه</span><span class="en">Updates itself</span></h3>
+        <p><span class="ar">تصلك الإصدارات الجديدة موقّعة، وتثبّتها بضغطة.</span><span class="en">New versions arrive signed, and install with one click.</span></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="ar">التثبيت</span><span class="en">Installing</span></h2>
+    <ol class="steps">
+      <li><span class="ar">نزّل الملف وشغّله، واختر لغة التثبيت.</span><span class="en">Download the file, run it, and pick the language.</span></li>
+      <li><span class="ar">إن ظهرت نافذة «Windows protected your PC» فاضغط «More info» ثم «Run anyway»: البرنامج جديد ولم يتعرّف عليه Windows بعد.</span><span class="en">If "Windows protected your PC" appears, click "More info" and then "Run anyway": the app is new and Windows doesn't know it yet.</span></li>
+      <li><span class="ar">يعمل البرنامج من منطقة الإشعارات ويبدأ مع Windows، فيستمر الجلب التلقائي وأنت تعمل.</span><span class="en">The app runs from the notification area and starts with Windows, so auto-fetch keeps working while you do.</span></li>
+    </ol>
+    <p class="note"><span class="ar">للدراسة الشخصية. المحاضرات ملك للجامعة؛ نرجو عدم نشر المحاضرات المحوّلة. TQ Tech جهة مستقلة لا تتبع الجامعة الافتراضية السورية.</span><span class="en">For personal study. The lectures belong to the university; please don't publish converted lectures. TQ Tech is independent and not affiliated with the Syrian Virtual University.</span></p>
+  </section>
+
+  <footer>
+    <span>© 2026 TQ Tech (Triple Quote Tech)</span>
+    <span><a href="mailto:tqtechsyria@gmail.com" class="ltr">tqtechsyria@gmail.com</a> · <a href="https://www.facebook.com/tqtechsy/">Facebook</a> · <a href="https://github.com/tqtechsy/lrec-converter">GitHub</a></span>
+  </footer>
+</div>
+<script>
+  // Arabic first; the choice is remembered on this device
+  const btn = document.getElementById('lang');
+  function setLang(l) {
+    document.documentElement.lang = l; document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+    btn.textContent = l === 'ar' ? 'English' : 'العربية';
+    document.title = l === 'ar' ? 'TQ Tech · محوّل LREC' : 'TQ Tech · LREC Converter';
+    try { localStorage.setItem('lang', l); } catch {}
+  }
+  let saved = null; try { saved = localStorage.getItem('lang'); } catch {}
+  setLang(saved === 'en' ? 'en' : 'ar');
+  btn.addEventListener('click', () => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar'));
+</script>
+</body>
+</html>
